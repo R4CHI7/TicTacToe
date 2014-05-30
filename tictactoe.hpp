@@ -8,9 +8,10 @@ class TicTacToe
 private:
 	char board[9];
 	char turn;
+	int aiLevel;
 
 public:
-	TicTacToe(char);
+	TicTacToe(char, int);
 	~TicTacToe();
 	void drawBoard();
 	void aiTurn();

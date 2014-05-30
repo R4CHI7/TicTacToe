@@ -1,16 +1,19 @@
 #include "tictactoe.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <time.h>						// For srand
 
-TicTacToe::TicTacToe(char t)
+TicTacToe::TicTacToe(char t, int ai)
 {
 	for (int i = 0; i < 9; ++i)
 		board[i] = ' ';
 	turn = t;
+	aiLevel = ai;
 }
 
 TicTacToe::~TicTacToe()
 {
-
+	std::cout << "Nice playing with you.. Goodbye!\n";
 }
 
 void TicTacToe::drawBoard()
@@ -18,9 +21,9 @@ void TicTacToe::drawBoard()
 	for (int i = 0; i < 25; ++i)
 		std::cout << "\n";
 	std::cout << " " << board[0] << " | " << board[1] << " | " << board[2] << "\n";
-	std::cout << "----------" << "\n";
+	std::cout << "-----------" << "\n";
 	std::cout << " " << board[3] << " | " << board[4] << " | " << board[5] << "\n";
-	std::cout << "----------" << "\n";
+	std::cout << "-----------" << "\n";
 	std::cout << " " << board[6] << " | " << board[7] << " | " << board[8] << "\n";
 }
 
@@ -32,12 +35,29 @@ int TicTacToe::minimax()
 void TicTacToe::aiTurn()
 {
 	int i;
-	for (i = 0; i < 9; ++i)
+	if(aiLevel == 1)
 	{
-		if(board[i] == ' ')
-			break;
+		for (i = 0; i < 9; ++i)
+		{
+			if(board[i] == ' ')
+				break;
+		}
+		board[i] = 'X';
 	}
-	board[i] = 'X';
+
+	else if(aiLevel == 2)
+	{
+		while(true)
+		{
+			srand(time(NULL));
+			int index = rand() % 9;
+			if(board[index] == ' ')
+			{
+				board[index] = 'X';
+				break;
+			}
+		}
+	}
 	drawBoard();
 }
 
