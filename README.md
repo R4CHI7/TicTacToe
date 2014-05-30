@@ -15,10 +15,14 @@ This will produce and executable in the directory. Run by issuing
 `./tic-tac-toe`
 
 The program expects 2 arguments (1 is optional). These are:
+
 1. First move.
-  * **p**: player moves first
-  * **c**: computer moves first
+
+  + **p**: player moves first
+  + **c**: computer moves first
+
 2. The AI Level.
+
   * Level 1: A dumb Computer, fills in the first empty position
   * Level 2: Little smart, randomly selects and empty position
   * Level 3: Minimax applied to search for the best position.
@@ -29,6 +33,7 @@ Contributing
 ------------
 
 To contribute:
+
 1. Fork the repo
 2. Clone the repo
 3. Hack hack hack!
