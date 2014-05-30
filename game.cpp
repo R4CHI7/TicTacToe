@@ -35,5 +35,6 @@ int main(int argc, char const *argv[])
 
 	gameObj = new TicTacToe(argv[1][0], ai);
 	gameObj->play();
+	delete gameObj;
 	return 0;
 }

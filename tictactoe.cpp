@@ -13,7 +13,7 @@ TicTacToe::TicTacToe(char t, int ai)
 
 TicTacToe::~TicTacToe()
 {
-	std::cout << "Nice playing with you.. Goodbye!\n";
+	std::cout << "\nNice playing with you.. Goodbye!\n";
 }
 
 void TicTacToe::drawBoard()
@@ -27,15 +27,44 @@ void TicTacToe::drawBoard()
 	std::cout << " " << board[6] << " | " << board[7] << " | " << board[8] << "\n";
 }
 
-int TicTacToe::minimax()
+int TicTacToe::minimax(char player)
 {
+	int position = -1;
+	int score = -2;
+	int winner = gameFinish();
+	if(winner != -1)
+		return winner;
 
+	for (int i = 0; i < 9; ++i)
+	{
+		if(board[i] == ' ')
+		{
+			if(player == 'c')
+				board[i] = 'X';
+			else
+				board[i] = 'O';
+
+			int tempScore;
+			if(player == 'c')
+				tempScore = -minimax('p');
+			else
+				tempScore = -minimax('c');
+
+			if(tempScore > score)
+			{
+				score = tempScore;
+				position = i;
+			}
+			board[i] = ' ';
+		}
+	}
+	return position;
 }
 
 void TicTacToe::aiTurn()
 {
 	int i;
-	if(aiLevel == 1)
+	if(aiLevel == 1)							// <== LEVEL 1 AI
 	{
 		for (i = 0; i < 9; ++i)
 		{
@@ -45,7 +74,7 @@ void TicTacToe::aiTurn()
 		board[i] = 'X';
 	}
 
-	else if(aiLevel == 2)
+	else if(aiLevel == 2)						// <== LEVEL 2 AI
 	{
 		while(true)
 		{
@@ -57,6 +86,27 @@ void TicTacToe::aiTurn()
 				break;
 			}
 		}
+	}
+
+	else										// <== LEVEL 3 AI
+	{
+		int move = -1;
+		int score = -2;
+		for (int i = 0; i < 9; ++i)
+		{
+			if(board[i] == ' ')
+			{
+				board[i] = 'X';
+				int tempScore = -minimax('p');
+				board[i] = ' ';
+				if(tempScore > score)
+				{
+					score = tempScore;
+					move = i;
+				}
+			}
+		}
+		board[move] = 'X';
 	}
 	drawBoard();
 }
@@ -137,5 +187,4 @@ void TicTacToe::play()
 	{
 		std::cout << "\nBoo! You lost to the computer!";
 	}
-
 }

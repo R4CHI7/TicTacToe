@@ -16,7 +16,7 @@ public:
 	void drawBoard();
 	void aiTurn();
 	void playerTurn();
-	int minimax();
+	int minimax(char player);
 	int gameFinish();
 	void play();
 };
